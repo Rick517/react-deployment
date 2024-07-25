@@ -3,8 +3,9 @@ import Footer from './components/Footer.jsx';
 import About from './components/About.jsx';
 import Tasks from './components/Tasks.jsx';
 import AddTask from './components/AddTask.jsx';
+import OpenedTask from './components/OpenedTask.jsx';
 import useFetch from './hooks/useFetch.jsx';
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 export default function App() {
@@ -44,12 +45,13 @@ export default function App() {
     setTasks([task, ...tasks])
   }
 
-  // qq How to create router in react? How to implement creating a route? What is the html we can put inside route? What to do with reloading on links?
+  // qq How to create router in react? How to implement creating a route? What is the html we can put inside route? What to do with reloading on links? qq What does routes mean to every single route? What is the difference betweeen link and route?
+  // qq How to create a route with varing id (maybe, just explain the workflow)? How do we access every item?
   return <Router>
     <div>
       <Header onAdd={() => {setShowAddTask((showAddTask + 1) % 2)}} showAdd={showAddTask} />
       <Routes>
-        <Route path="/" exact element={
+        <Route path="/react-deployment/" exact element={
           <>
             {showAddTask === 1 && <AddTask addTask={addTask} />}
             {error && <div>{error}</div>}
@@ -63,7 +65,8 @@ export default function App() {
             <Footer />
           </>
         } />
-        <Route path='/about' element={<About />} />
+        <Route path='/react-deployment/about' element={<About />} />
+        <Route path='/react-deployment/task/:id' element={<OpenedTask />} />
       </Routes>
     </div>
   </Router>

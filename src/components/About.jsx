@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 function About() {
     return (
         <div>
-          <Link to="/">Go back</Link>
+          <Link to="/react-deployment/">Go back</Link>
           <div>About</div>
         </div>
       );

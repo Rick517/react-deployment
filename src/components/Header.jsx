@@ -13,7 +13,7 @@ function Header({title="Task Manager", onAdd, showAdd}) {
     return <header>
         <h1>{title}</h1>
         {
-            location.pathname === "/" && <Button color={["green", "black"][showAdd]} text={["ADD", "CLOSE"][showAdd]} onClick={onAdd} />
+            location.pathname === "/react-deployment/" && <Button color={["green", "black"][showAdd]} text={["ADD", "CLOSE"][showAdd]} onClick={onAdd} />
         }
         
         {/*<Button color="red" text="Hello" onClick={onClick} />

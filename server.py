@@ -62,6 +62,14 @@ def delete_task():
             return jsonify({'message': 'Task deleted'}), 204
     return jsonify({"error": "Task not found"}), 404
 
+@app.route('/api/task/<int:task_id>', methods=['GET'])
+def get_task(task_id):
+    task = next((task for task in tasks if task['id'] == task_id), None)
+    if task:
+        return jsonify(task), 200
+    else:
+        return jsonify({"error": "Task not found"}), 404
+
 if __name__ == '__main__':
     app.run(debug=True)
 
