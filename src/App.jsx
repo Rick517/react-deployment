@@ -2,6 +2,7 @@ import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import About from './components/About.jsx';
 import Tasks from './components/Tasks.jsx';
+import NotFound from './components/NotFound.jsx';
 import AddTask from './components/AddTask.jsx';
 import OpenedTask from './components/OpenedTask.jsx';
 import useFetch from './hooks/useFetch.jsx';
@@ -68,6 +69,7 @@ export default function App() {
         } />
         <Route path='/react-deployment/about' element={<About />} />
         <Route path='/react-deployment/task/:id' element={<OpenedTask makeRequest={makeRequest} />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </div>
   </Router>
