@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, request
-
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -42,6 +41,19 @@ def add_task():
     return jsonify({'message': "OK"}), 201
 
 @app.route('/api', methods=['PUT'])
+def update_task():
+    data = request.get_json()
+    print(data)
+    id = data['id']
+    for i, task in enumerate(tasks): 
+        if task['id'] == id: 
+            tasks[i] = data
+            print('task is changed')
+            return jsonify("OK"), 204
+    return "", 400
+    
+
+@app.route('/api', methods=['PATCH'])
 def change_reminder():
     id, reminder = request.get_json().get('id'), request.get_json().get('reminder')
     task = next((task for task in tasks if task['id'] == id), None)

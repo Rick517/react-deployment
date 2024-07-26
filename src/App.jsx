@@ -9,6 +9,8 @@ import {useState} from 'react'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 export default function App() {
+  // qq Compare useState and useEffect by their purposes.
+    // We use useEffect when we want to do something in the beginning of mounting and at the end, but not during process. During process we simply use uesState. 
   const [showAddTask, setShowAddTask] = useState(0);
   const { data: tasks, setData: setTasks, isPending, error } = useFetch('http://localhost:5000/api');
 
@@ -16,7 +18,8 @@ export default function App() {
     await fetch('http://localhost:5000/api', {
       method: type,
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        credentials: 'include'
       },
       body: JSON.stringify(data)
     })
@@ -34,7 +37,7 @@ export default function App() {
     setTasks(tasks.map(task => {
       if (task.id === id) {
         task.reminder = !task.reminder;
-        makeRequest('PUT', {'id': id, 'reminder': task.reminder});
+        makeRequest('PATCH', {'id': id, 'reminder': task.reminder});
       }
       return task
     }))
@@ -45,8 +48,6 @@ export default function App() {
     setTasks([task, ...tasks])
   }
 
-  // qq How to create router in react? How to implement creating a route? What is the html we can put inside route? What to do with reloading on links? qq What does routes mean to every single route? What is the difference betweeen link and route?
-  // qq How to create a route with varing id (maybe, just explain the workflow)? How do we access every item?
   return <Router>
     <div>
       <Header onAdd={() => {setShowAddTask((showAddTask + 1) % 2)}} showAdd={showAddTask} />
@@ -66,7 +67,7 @@ export default function App() {
           </>
         } />
         <Route path='/react-deployment/about' element={<About />} />
-        <Route path='/react-deployment/task/:id' element={<OpenedTask />} />
+        <Route path='/react-deployment/task/:id' element={<OpenedTask makeRequest={makeRequest} />} />
       </Routes>
     </div>
   </Router>
