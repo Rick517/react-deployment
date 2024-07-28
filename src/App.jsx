@@ -10,8 +10,6 @@ import {useState} from 'react'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 export default function App() {
-  // qq Compare useState and useEffect by their purposes.
-    // We use useEffect when we want to do something in the beginning of mounting and at the end, but not during process. During process we simply use uesState. 
   const [showAddTask, setShowAddTask] = useState(0);
   const { data: tasks, setData: setTasks, isPending, error } = useFetch('http://localhost:5000/api');
 

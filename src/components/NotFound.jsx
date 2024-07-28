@@ -1,7 +1,5 @@
-import React from 'react'
 import {Link} from 'react-router-dom'
 
-// qq How to handle errors with react?
 function NotFound() {
   return (
     <div>
